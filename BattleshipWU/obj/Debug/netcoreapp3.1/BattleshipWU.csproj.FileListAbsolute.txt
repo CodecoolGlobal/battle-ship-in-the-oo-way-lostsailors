@@ -1,0 +1,11 @@
+C:\Users\asus\Documents\CODECOOL\2_OOP\1_\Battleship_warmup\BattleshipWU\BattleshipWU\obj\Debug\netcoreapp3.1\BattleshipWU.csprojAssemblyReference.cache
+C:\Users\asus\Documents\CODECOOL\2_OOP\1_\Battleship_warmup\BattleshipWU\BattleshipWU\obj\Debug\netcoreapp3.1\BattleshipWU.AssemblyInfoInputs.cache
+C:\Users\asus\Documents\CODECOOL\2_OOP\1_\Battleship_warmup\BattleshipWU\BattleshipWU\obj\Debug\netcoreapp3.1\BattleshipWU.AssemblyInfo.cs
+C:\Users\asus\Documents\CODECOOL\2_OOP\1_\Battleship_warmup\BattleshipWU\BattleshipWU\bin\Debug\netcoreapp3.1\BattleshipWU.exe
+C:\Users\asus\Documents\CODECOOL\2_OOP\1_\Battleship_warmup\BattleshipWU\BattleshipWU\bin\Debug\netcoreapp3.1\BattleshipWU.deps.json
+C:\Users\asus\Documents\CODECOOL\2_OOP\1_\Battleship_warmup\BattleshipWU\BattleshipWU\bin\Debug\netcoreapp3.1\BattleshipWU.runtimeconfig.json
+C:\Users\asus\Documents\CODECOOL\2_OOP\1_\Battleship_warmup\BattleshipWU\BattleshipWU\bin\Debug\netcoreapp3.1\BattleshipWU.runtimeconfig.dev.json
+C:\Users\asus\Documents\CODECOOL\2_OOP\1_\Battleship_warmup\BattleshipWU\BattleshipWU\bin\Debug\netcoreapp3.1\BattleshipWU.dll
+C:\Users\asus\Documents\CODECOOL\2_OOP\1_\Battleship_warmup\BattleshipWU\BattleshipWU\bin\Debug\netcoreapp3.1\BattleshipWU.pdb
+C:\Users\asus\Documents\CODECOOL\2_OOP\1_\Battleship_warmup\BattleshipWU\BattleshipWU\obj\Debug\netcoreapp3.1\BattleshipWU.dll
+C:\Users\asus\Documents\CODECOOL\2_OOP\1_\Battleship_warmup\BattleshipWU\BattleshipWU\obj\Debug\netcoreapp3.1\BattleshipWU.pdb
