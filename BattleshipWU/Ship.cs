@@ -41,5 +41,14 @@ namespace BattleshipWU {
                     break;
             }
         }
+
+        public static void displayShipTypes() {
+            Console.WriteLine("Available ship types:\n" +
+                "Carrier (occupies 5 squares) - Type: CA\n" +
+                "Battleship(4) - Type: B\n" +
+                "Cruiser(3) - Type: CR\n" +
+                "Submarine(3) - Type: S\n" +
+                "Destroyer(2) - Type: D\n");
+        }
     }
 }

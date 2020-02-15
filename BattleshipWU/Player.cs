@@ -5,6 +5,7 @@ using System.Text;
 namespace BattleshipWU {
     class Player {
         public string Name { get; set; }
+        public Ocean MyOcean { get; set; }
 
         public Player (string name) {
             this.Name = name;
