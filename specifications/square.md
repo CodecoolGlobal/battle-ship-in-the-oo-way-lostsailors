@@ -1,5 +1,5 @@
 # Square class
-*The class represents one cell of board/ship in the game*
+*The class object represents one cell of board/ship in the game*
 
 #### Fields
 Name | Type | Description
