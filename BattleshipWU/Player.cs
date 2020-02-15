@@ -10,6 +10,7 @@ namespace BattleshipWU {
             this.Name = name;
         }
 
+
         public Ocean guessEnemyPositionAKAFire(string position, Ocean enemysOcean, Ocean myOcean) {
             /* PSEUDOCODE
             if enemyOcean[position] == ship {
