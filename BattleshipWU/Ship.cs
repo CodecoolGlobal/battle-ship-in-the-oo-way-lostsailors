@@ -20,9 +20,9 @@ namespace BattleshipWU {
 
         public ShipType Type { get; set; }
         public int Size { get; set; }
-        public Layout ShipLayout { get; set; }
+        public string ShipLayout { get; set; }
         
-        public Ship(ShipType type, Layout shipLayout) {
+        public Ship(ShipType type, string shipLayout) {
             this.Type = type;
             this.ShipLayout = shipLayout;
             switch (type) {
@@ -43,7 +43,7 @@ namespace BattleshipWU {
         }
 
         public static void displayShipTypes() {
-            Console.WriteLine("Available ship types:\n" +
+            Console.WriteLine("\nAvailable ship types:\n" +
                 "Carrier (occupies 5 squares) - Type: CA\n" +
                 "Battleship(4) - Type: B\n" +
                 "Cruiser(3) - Type: CR\n" +

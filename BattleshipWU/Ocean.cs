@@ -54,15 +54,15 @@ namespace BattleshipWU {
             return this.Squares;
         }*/
             
-        public List<List<Square>> placeShipAtTheOcean(Ship ship, int positionX, int positionY, Square squareShip, Square squareOcean) {
-            if (ship.ShipLayout == Ship.Layout.HORIZONTAL) {
+        public List<List<Square>> placeShipAtTheOcean(Ship ship, int positionX, int positionY, Square squareShip) {
+            if (ship.ShipLayout == "VERTICAL") {
                 for (int i = positionX; i < positionX + ship.Size; i++) {
-                    this.Squares[positionY - 1][i] = squareShip;
+                    this.Squares[i][positionY] = squareShip;
                 }
             }
-            else if (ship.ShipLayout == Ship.Layout.VERTICAL) {
+            else if (ship.ShipLayout == "HORIZONTAL") {
                 for (int j = positionY; j < positionY + ship.Size; j++) {
-                    this.Squares[j][positionX - 1] = squareShip;
+                    this.Squares[positionX][j] = squareShip;
                 }
             }
             return this.Squares;

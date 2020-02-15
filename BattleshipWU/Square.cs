@@ -17,7 +17,7 @@ namespace BattleshipWU {
                 this.Fill = "X";
             }
             else {
-                this.Fill = "O";
+                this.Fill = " ";
             }
         }
     }
