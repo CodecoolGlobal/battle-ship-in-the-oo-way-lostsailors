@@ -9,7 +9,7 @@ namespace BattleshipWU {
         public List<List<Square>> Squares { get; private set; }
 
         public Ocean(int dimension) {
-            
+            this.Dimension = dimension;
             Square gameField = new Square(Square.SquareType.OCEAN);
             this.Squares = new List<List<Square>>();
 
@@ -23,7 +23,21 @@ namespace BattleshipWU {
         }
 
         public void displayOcean() {
+            //A-Z: ASCII values 65-90
+            Console.Write(String.Format("{0,5}", ""));
+            for (int i = 65; i < 65 + this.Dimension; i++) {
+                Console.Write(" " + (char) i + " ");
+            }
+            Console.WriteLine();
+            Console.Write(String.Format("{0,5}", ""));
+            for (int i = 0; i < this.Dimension; i++) {
+                Console.Write("---");
+            }
+            Console.WriteLine();
+
             foreach (List<Square> sqList in this.Squares) {
+                string s = String.Format("{0,5}", (this.Squares.IndexOf(sqList) + 1)+" |");
+                Console.Write(s);
                 foreach (Square squareO in sqList) {
                     Console.Write(" " + squareO.Fill + " ");
                 }
