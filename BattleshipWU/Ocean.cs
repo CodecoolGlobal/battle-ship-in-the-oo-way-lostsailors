@@ -45,27 +45,36 @@ namespace BattleshipWU {
             }
         }
 
-        /*public List<List<Square>> createEmptyOcean(int dimension, Square ocean) {
-            for (int i = 0; i < dimension; i++) {
-                for (int j = 0; j < dimension; j++) {
-                    this.Squares[i][j] = ocean;
-                }
-            }
-            return this.Squares;
-        }*/
-            
         public List<List<Square>> placeShipAtTheOcean(Ship ship, int positionX, int positionY, Square squareShip) {
-            if (ship.ShipLayout == "VERTICAL") {
-                for (int i = positionX; i < positionX + ship.Size; i++) {
-                    this.Squares[i][positionY] = squareShip;
+            if (canPlaceShip(ship, positionX, positionY)) {
+                if (ship.ShipLayout == "VERTICAL") {
+                    for (int i = positionX; i < positionX + ship.Size; i++) {
+                        this.Squares[i][positionY] = squareShip;
+                    }
+                } else if (ship.ShipLayout == "HORIZONTAL") {
+                    for (int j = positionY; j < positionY + ship.Size; j++) {
+                        this.Squares[positionX][j] = squareShip;
+                    }
                 }
             }
-            else if (ship.ShipLayout == "HORIZONTAL") {
-                for (int j = positionY; j < positionY + ship.Size; j++) {
-                    this.Squares[positionX][j] = squareShip;
-                }
+            else {
+                Console.WriteLine("Cannot place that ship in the ocean");
             }
             return this.Squares;
+        }
+
+        public bool canPlaceShip(Ship ship, int positionX, int positionY) {
+            if (ship.ShipLayout == "VERTICAL") {
+                if (positionX + ship.Size >= this.Dimension) {
+                    return false;
+                }
+            }
+            if (ship.ShipLayout == "HORIZONTAL") {
+                if (positionY + ship.Size >= this.Dimension) {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

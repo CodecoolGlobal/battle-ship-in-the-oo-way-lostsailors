@@ -21,48 +21,60 @@ namespace BattleshipWU {
             foreach (string type in shipTypesNames) {
                 Console.WriteLine("\nPlease place " + type + " squares) on your ocean:");
                 
+                int index = 0;
+                Ship ship = new Ship(Ship.ShipType.CA, "HORIZONTAL");
                 int positionX = -1;
                 int positionY = -1;
-                while (positionX == -1 || positionY == -1) {
-                    Console.WriteLine("Position:");
-                    string position = Console.ReadLine().ToUpper();
+                
+                bool shipPlacedInTheOcean = false;
+                while (shipPlacedInTheOcean == false) {
+                    positionX = -1;
+                    positionY = -1;
+                    while (positionX == -1 || positionY == -1) {
+                        Console.WriteLine("Position:");
+                        string position = Console.ReadLine().ToUpper();
 
-                    if (isLetter(position[0].ToString())) {
-                        positionY = (int)position[0] - 65;
-                        if (positionY >= ocean.Dimension) {
-                            positionY = -1;
-                            Console.WriteLine("Column index exceeded board dimension");
-                        }
-                        if (isNumeric(position.Substring(1))) {
-                            positionX = Int32.Parse(position.Substring(1)) - 1;
-                            if (positionX >= ocean.Dimension) {
-                                positionX = -1;
-                                Console.WriteLine("Row index exceeded board dimension");
+                        if (isLetter(position[0].ToString())) {
+                            positionY = (int)position[0] - 65;
+                            if (positionY >= ocean.Dimension) {
+                                positionY = -1;
+                                Console.WriteLine("Column index exceeded board dimension");
+                            }
+                            if (isNumeric(position.Substring(1))) {
+                                positionX = Int32.Parse(position.Substring(1)) - 1;
+                                if (positionX >= ocean.Dimension) {
+                                    positionX = -1;
+                                    Console.WriteLine("Row index exceeded board dimension");
+                                }
+                            } else {
+                                Console.WriteLine("Invalid row number");
                             }
                         } else {
-                            Console.WriteLine("Invalid row number");
+                            Console.WriteLine("First input character must be a letter indcating column");
                         }
                     }
-                    else {
-                        Console.WriteLine("First input character must be a letter indcating column");
+
+                    string layout = null;
+                    while (layout == null) {
+                        Console.WriteLine("Layout (h - horizontal/v - vertical):");
+                        string layoutInput = Console.ReadLine().ToLower();
+                        if (layoutInput == "h") {
+                            layout = "HORIZONTAL";
+                        } else if (layoutInput == "v") {
+                            layout = "VERTICAL";
+                        } else {
+                            Console.WriteLine("Wrong input");
+                        }
+                    }
+
+                    index = shipTypesNames.IndexOf(type);
+                    ship = new Ship(shipTypes[index], layout);
+
+                    shipPlacedInTheOcean = ocean.canPlaceShip(ship, positionX, positionY);
+                    if (shipPlacedInTheOcean == false) {
+                        Console.WriteLine("Not possible to place the ship in the ocean, try again");
                     }
                 }
-
-                string layout = null;
-                while (layout == null) {
-                    Console.WriteLine("Layout (h - horizontal/v - vertical):");
-                    string layoutInput = Console.ReadLine().ToLower();
-                    if (layoutInput == "h") {
-                        layout = "HORIZONTAL";
-                    } else if (layoutInput == "v") {
-                        layout = "VERTICAL";
-                    } else {
-                        Console.WriteLine("Wrong input");
-                    }
-                }
-
-                int index = shipTypesNames.IndexOf(type);
-                Ship ship = new Ship(shipTypes[index], layout);
 
                 ocean.placeShipAtTheOcean(ship, positionX, positionY, new Square(Square.SquareType.SHIP));
                 ocean.displayOcean();
