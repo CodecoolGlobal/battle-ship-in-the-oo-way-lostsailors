@@ -9,8 +9,8 @@ namespace BattleshipWU {
             OCEAN
         }
         public string Fill { get; set; }
-        public int Row { get; private set; }
-        public int Column { get; private set; }
+        //public int Row { get; private set; }
+        //public int Column { get; private set; }
 
         public Square(SquareType type) {
             if (type == SquareType.SHIP) {

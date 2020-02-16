@@ -51,7 +51,8 @@ namespace BattleshipWU {
                     for (int i = positionX; i < positionX + ship.Size; i++) {
                         this.Squares[i][positionY] = squareShip;
                     }
-                } else if (ship.ShipLayout == "HORIZONTAL") {
+                }
+                else if (ship.ShipLayout == "HORIZONTAL") {
                     for (int j = positionY; j < positionY + ship.Size; j++) {
                         this.Squares[positionX][j] = squareShip;
                     }
@@ -75,6 +76,40 @@ namespace BattleshipWU {
                 }
             }
             return true;
+        }
+
+        public bool checkIfShipsOverlap(Ship ship, int positionX, int positionY) {
+            if (ship.ShipLayout == "VERTICAL") {
+                for (int i = positionX; i < positionX + ship.Size; i++) {
+                    if (this.Squares[i][positionY].Fill == "X") {
+                        return true;
+                    }
+                }
+            } else if (ship.ShipLayout == "HORIZONTAL") {
+                for (int j = positionY; j < positionY + ship.Size; j++) {
+                    if (this.Squares[positionX][j].Fill == "X") {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public bool checkIfShipsTouchEachOther(Ship ship, int positionX, int positionY) {
+            //if (ship.ShipLayout == "VERTICAL") {
+            //    for (int i = positionX; i < positionX + ship.Size; i++) {
+            //        if (this.Squares[i][positionY].Fill == "X") {
+            //            return true;
+            //        }
+            //    }
+            //} else if (ship.ShipLayout == "HORIZONTAL") {
+            //    for (int j = positionY; j < positionY + ship.Size; j++) {
+            //        if (this.Squares[positionX][j].Fill == "X") {
+            //            return true;
+            //        }
+            //    }
+            //}
+            return false;
         }
     }
 }
