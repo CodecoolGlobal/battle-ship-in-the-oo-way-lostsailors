@@ -67,7 +67,6 @@ namespace BattleshipWU {
         private int[] getShipPositionInput(Ocean ocean) {
             int positionX = -1;
             int positionY = -1;
-            Console.WriteLine(ocean.Dimension + " My Hand is a dolphin");
             while (positionX == -1 || positionY == -1) {
                 Console.WriteLine("Position:");
                 string position = Console.ReadLine().ToUpper();
