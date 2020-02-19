@@ -4,11 +4,9 @@
 #### Fields
 Name | Type | Description
 -----|------|------------
-Fill | enum (SHIP/OCEAN) | Type of the square
-Row | int | Square vertical position on the game board
-Column | int |  Square horizontal position on the game board
+Fill | enum (SHIPTYPES-5/OCEAN/HIT/MISS) | Type of the square
 
 #### Instance methods
 Name | Arguents | Return | Throws exceptions | Description
 -----|----------|--------|-------------------|------------
-None |----------|--------|-------------------|------------
+Hit |----------|--------|-------------------|------------
