@@ -10,9 +10,9 @@ namespace BattleshipWU {
 
         public Ocean(int dimension) {
             this.Dimension = dimension;
-            Square gameField = new Square(Square.SquareType.OCEAN);
             this.Squares = new List<List<Square>>();
 
+            Square gameField = new Square(Square.SquareType.OCEAN);
             for (int i = 0; i < dimension; i++) {
                 List<Square> row = new List<Square>();
                 for (int j = 0; j < dimension; j++) {
@@ -26,7 +26,7 @@ namespace BattleshipWU {
             //A-Z: ASCII values 65-90
             Console.Write(String.Format("{0,5}", ""));
             for (int i = 65; i < 65 + this.Dimension; i++) {
-                Console.Write(" " + (char) i + " ");
+                Console.Write(" " + (char)i + " ");
             }
             Console.WriteLine();
             Console.Write(String.Format("{0,5}", ""));
@@ -36,7 +36,7 @@ namespace BattleshipWU {
             Console.WriteLine();
 
             foreach (List<Square> sqList in this.Squares) {
-                string s = String.Format("{0,5}", (this.Squares.IndexOf(sqList) + 1)+" |");
+                string s = String.Format("{0,5}", (this.Squares.IndexOf(sqList) + 1) + " |");
                 Console.Write(s);
                 foreach (Square squareO in sqList) {
                     Console.Write(" " + squareO.Fill + " ");
@@ -64,52 +64,45 @@ namespace BattleshipWU {
             return this.Squares;
         }
 
-        public bool canPlaceShip(Ship ship, int positionX, int positionY) {
+        public bool canPlaceShip(Ship ship, int positionY, int positionX) {
+            // TBC - STILL SOME ERRORS WHEN YOU PUT A10 etc.
+            var startX = positionX;
+            if (startX > 0) {
+                startX--;
+            }
+            var startY = positionY;
+            if (startY > 0) {
+                startY--;
+            }
+
+            var endX = positionX;
+            var endY = positionY;
+
             if (ship.ShipLayout == "VERTICAL") {
-                if (positionX + ship.Size >= this.Dimension) {
-                    return false;
+                endY += ship.Size;
+            }
+            else {
+                endX += ship.Size;
+            }
+            if (endY < this.Dimension) {
+                endY++;
+            }
+            if (endX < this.Dimension)
+                endX++;
+
+            if (startX < 0 || startY < 0 || endX > Dimension || endY > Dimension) {
+                return false;
+            }
+
+            for (int y = startY; y <= endY; y++) {
+                for (int x = startX; x <= endX; x++) {
+                    if ("X" == this.Squares[y][x].Fill) {
+                        return false;
+                    }
                 }
             }
-            if (ship.ShipLayout == "HORIZONTAL") {
-                if (positionY + ship.Size >= this.Dimension) {
-                    return false;
-                }
-            }
+
             return true;
-        }
-
-        public bool checkIfShipsOverlap(Ship ship, int positionX, int positionY) {
-            if (ship.ShipLayout == "VERTICAL") {
-                for (int i = positionX; i < positionX + ship.Size; i++) {
-                    if (this.Squares[i][positionY].Fill == "X") {
-                        return true;
-                    }
-                }
-            } else if (ship.ShipLayout == "HORIZONTAL") {
-                for (int j = positionY; j < positionY + ship.Size; j++) {
-                    if (this.Squares[positionX][j].Fill == "X") {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
-        public bool checkIfShipsTouchEachOther(Ship ship, int positionX, int positionY) {
-            //if (ship.ShipLayout == "VERTICAL") {
-            //    for (int i = positionX; i < positionX + ship.Size; i++) {
-            //        if (this.Squares[i][positionY].Fill == "X") {
-            //            return true;
-            //        }
-            //    }
-            //} else if (ship.ShipLayout == "HORIZONTAL") {
-            //    for (int j = positionY; j < positionY + ship.Size; j++) {
-            //        if (this.Squares[positionX][j].Fill == "X") {
-            //            return true;
-            //        }
-            //    }
-            //}
-            return false;
         }
     }
 }
