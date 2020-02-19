@@ -63,7 +63,7 @@ namespace BattleshipWU {
 
             return ocean;
         }
-
+//cokolwiek
         private int[] getShipPositionInput(Ocean ocean) {
             int positionX = -1;
             int positionY = -1;
