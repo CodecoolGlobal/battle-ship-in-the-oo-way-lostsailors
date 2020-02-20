@@ -17,14 +17,14 @@ namespace BattleshipWU {
 
             Console.WriteLine("Player1 - put your ships on the board\n" +
                 "Player2 - please step out");
-            Thread.Sleep(3000);
+            Thread.Sleep(300);
             Ship.displayShipTypes();
 
             ocean1 = player1.getShipsPositions(ocean1);
 
             Console.WriteLine("Player2 - put your ships on the board\n" +
                 "Player1 - please step out");
-            Thread.Sleep(3000);
+            Thread.Sleep(300);
             Ship.displayShipTypes();
 
             ocean2 = player2.getShipsPositions(ocean2);
