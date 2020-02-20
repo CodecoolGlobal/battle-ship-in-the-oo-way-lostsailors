@@ -28,7 +28,6 @@ namespace BattleshipWU {
                         if (userChoice == "1") { gameStatus = Status.SHIPS_POSITIONING; } else if (userChoice == "2") { gameStatus = Status.EXIT; } else { Console.WriteLine("Incorrect input"); }
                         break;
 
-
                     case Status.SHIPS_POSITIONING:
 
                         foreach (string player in playersNamesInitial) {
@@ -90,3 +89,4 @@ namespace BattleshipWU {
         }   
     }
 }
+//ss

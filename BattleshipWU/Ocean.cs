@@ -49,6 +49,7 @@ namespace BattleshipWU {
             if (canPlaceShip(ship, positionX, positionY)) {
                 if (ship.ShipLayout == "VERTICAL") {
                     for (int i = positionX; i < positionX + ship.Size; i++) {
+
                         this.Squares[i][positionY] = squareShip;
                     }
                 }
@@ -64,8 +65,11 @@ namespace BattleshipWU {
             return this.Squares;
         }
 
-        public bool canPlaceShip(Ship ship, int positionY, int positionX) {
-            // TBC - STILL SOME ERRORS WHEN YOU PUT A10 etc.
+        public bool canPlaceShip(Ship ship, int positionX, int positionY) {
+            // TBC - STILL SOME ERRORS WHEN YOU PUT A10 etc
+
+            var dimension = Dimension - 1;
+
             var startX = positionX;
             if (startX > 0) {
                 startX--;
@@ -79,24 +83,28 @@ namespace BattleshipWU {
             var endY = positionY;
 
             if (ship.ShipLayout == "VERTICAL") {
-                endY += ship.Size;
-            }
-            else {
                 endX += ship.Size;
             }
-            if (endY < this.Dimension) {
+            else {
+                endY += ship.Size;
+            }
+
+            if (endY < dimension) {
                 endY++;
             }
-            if (endX < this.Dimension)
-                endX++;
 
-            if (startX < 0 || startY < 0 || endX > Dimension || endY > Dimension) {
-                return false;
+            if (endX < dimension) {
+
+                endX++;
             }
+
+            if (startX < 0 || startY < 0 || endX > dimension || endY > dimension) {
+                return false;
+            } 
 
             for (int y = startY; y <= endY; y++) {
                 for (int x = startX; x <= endX; x++) {
-                    if ("X" == this.Squares[y][x].Fill) {
+                    if ("X" == Squares[y][x].Fill) {
                         return false;
                     }
                 }
@@ -106,3 +114,4 @@ namespace BattleshipWU {
         }
     }
 }
+//heheszkis
