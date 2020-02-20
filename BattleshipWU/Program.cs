@@ -6,29 +6,72 @@ using System.Threading;
 namespace BattleshipWU {
     class Program {
         static void Main(string[] args) {
-            Console.WriteLine("That is battleship game!");
 
-            Console.WriteLine("\nPlease tell me Player1 name:");
-            Player player1 = new Player(Console.ReadLine());
-            Ocean ocean1 = new Ocean(10);
-            Console.WriteLine("\nPlease tell me Player2 name:");
-            Player player2 = new Player(Console.ReadLine());
-            Ocean ocean2 = new Ocean(10);
+            bool endGame = false;
+            Status gameStatus = Status.START;
+            while (!endGame) {
 
-            Console.WriteLine("Player1 - put your ships on the board\n" +
-                "Player2 - please step out");
-            Thread.Sleep(300);
-            Ship.displayShipTypes();
+                switch (gameStatus) {
 
-            ocean1 = player1.getShipsPositions(ocean1);
+                    case Status.START:
+                        Console.Clear();
+                        Console.Write("That is battleship game! Welcome!\n\n" +
+                            "MENU:\n" +
+                            "\t1 - START GAME\n" +
+                            "\t2 - EXIT GAME\n\n" +
+                            "Please input what do you want to do?\n");
+                        string userChoice = Console.ReadLine();
+                        if (userChoice == "1") { gameStatus = Status.SHIPS_POSITIONING; } else if (userChoice == "2") { gameStatus = Status.EXIT; } else { Console.WriteLine("Incorrect input"); }
+                        break;
 
-            Console.WriteLine("Player2 - put your ships on the board\n" +
-                "Player1 - please step out");
-            Thread.Sleep(300);
-            Ship.displayShipTypes();
+                    case Status.SHIPS_POSITIONING:
+                        var playersNamesInitial = new List<string> { "Player1", "Player2"};
+                        var playersObjects = new Player[2];
+                        var playersOceans = new Ocean[2];
 
-            ocean2 = player2.getShipsPositions(ocean2);
+                        foreach (string player in playersNamesInitial) {
+                            Console.Clear();
+                            Console.WriteLine($"\nPlease tell me {player} name: ");
+                            int index = playersNamesInitial.IndexOf(player);
+                            playersObjects[index] = new Player(Console.ReadLine());
+                            playersOceans[index] = new Ocean(10);
+                            Console.WriteLine($"{player} - put your ships on the board\n" +
+                            "The other player - please step out!!");
+                            Thread.Sleep(3000);
+                            Ship.displayShipTypes();
+                            playersOceans[index] = playersObjects[index].getShipsPositions(playersOceans[index]);
+                        }
+                        Console.Clear();
+                        Console.WriteLine("\n\nAllright! - All ships are in the oceans! Time to play!");
+                        Thread.Sleep(5000);
+                        gameStatus = Status.FIGHT;
+                        break;
+
+
+                    case Status.FIGHT:
+                        break;
+
+
+                    case Status.WIN:
+                        break;
+
+
+                    case Status.EXIT:
+                        Console.Clear();
+                        Console.WriteLine("Thanks for playing! Come again soon.");
+                        endGame = true;
+                        break;
+                }
+            }
         }
+
+        enum Status {
+            START,
+            SHIPS_POSITIONING,
+            FIGHT,
+            WIN,
+            EXIT,
+        }   
     }
 }
-//s
+//ss

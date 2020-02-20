@@ -114,4 +114,4 @@ namespace BattleshipWU {
         }
     }
 }
-//heheszki
+//heheszkis
