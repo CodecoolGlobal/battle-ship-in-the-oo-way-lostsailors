@@ -77,7 +77,7 @@ namespace BattleshipWU {
                         positionY = -1;
                         Console.WriteLine("Column index exceeded board dimension");
                     }
-                    if (isNumeric(position.Substring(1))) {
+                    if (position.Substring(1) != "" && isNumeric(position.Substring(1))) {
                         positionX = Int32.Parse(position.Substring(1)) - 1;
                         if (positionX >= ocean.Dimension) {
                             positionX = -1;
