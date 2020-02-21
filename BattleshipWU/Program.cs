@@ -9,6 +9,10 @@ namespace BattleshipWU {
 
             bool endGame = false;
             Status gameStatus = Status.START;
+            var playersNamesInitial = new List<string> { "Player1", "Player2" };
+            var playersObjects = new Player[2];
+            string winnerName = "";
+
             while (!endGame) {
 
                 switch (gameStatus) {
@@ -25,21 +29,18 @@ namespace BattleshipWU {
                         break;
 
                     case Status.SHIPS_POSITIONING:
-                        var playersNamesInitial = new List<string> { "Player1", "Player2"};
-                        var playersObjects = new Player[2];
-                        var playersOceans = new Ocean[2];
 
                         foreach (string player in playersNamesInitial) {
                             Console.Clear();
                             Console.WriteLine($"\nPlease tell me {player} name: ");
                             int index = playersNamesInitial.IndexOf(player);
                             playersObjects[index] = new Player(Console.ReadLine());
-                            playersOceans[index] = new Ocean(10);
+                            playersObjects[index].MyOcean = new Ocean(10);
                             Console.WriteLine($"{player} - put your ships on the board\n" +
                             "The other player - please step out!!");
                             Thread.Sleep(3000);
                             Ship.displayShipTypes();
-                            playersOceans[index] = playersObjects[index].getShipsPositions(playersOceans[index]);
+                            playersObjects[index].MyOcean = playersObjects[index].getShipsPositions(playersObjects[index].MyOcean);
                         }
                         Console.Clear();
                         Console.WriteLine("\n\nAllright! - All ships are in the oceans! Time to play!");
@@ -49,10 +50,24 @@ namespace BattleshipWU {
 
 
                     case Status.FIGHT:
+                        bool winStatus = false;
+                        while (winStatus == false) {
+                            foreach (Player player in playersObjects) {
+                                Console.Clear();
+                                Console.WriteLine($"\nThis is the status of {player.Name} current shoots:\n\n");
+                                // TUTAJ DISPLAY BOARDA Z HIT/MISS TYLKO
+                                Console.WriteLine("Please input where do you want to shoot");
+                                // COLLECT INPUT (IF SHIP -> DISPLAY HIT, ELSE -> DISPLAY MISS)
+                                // DISPLAY AGAIN UPDATED BOARD
+                                // CHECK ISWIN -> save winnerName = player.Name
+                            }
+                        }
                         break;
 
-
                     case Status.WIN:
+                        Console.Clear();
+                        Console.WriteLine($"\nCongrats!! {winnerName} is the champion!!");
+                        gameStatus = Status.START;
                         break;
 
 
