@@ -65,7 +65,7 @@ namespace BattleshipWU {
             return this.Squares;
         }
 
-        public bool canPlaceShip(Ship ship, int positionX, int positionY) {
+        public bool canPlaceShip(Ship ship, int positionY, int positionX) {
             // TBC - STILL SOME ERRORS WHEN YOU PUT A10 etc
 
             var dimension = Dimension - 1;
@@ -83,18 +83,17 @@ namespace BattleshipWU {
             var endY = positionY;
 
             if (ship.ShipLayout == "VERTICAL") {
-                endX += ship.Size;
+                endY += ship.Size-1;
             }
             else {
-                endY += ship.Size;
+                endX += ship.Size-1;
             }
-
+            // if end point is not the last coordinate check one past it.
             if (endY < dimension) {
                 endY++;
             }
 
             if (endX < dimension) {
-
                 endX++;
             }
 
