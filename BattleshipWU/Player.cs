@@ -12,9 +12,10 @@ namespace BattleshipWU {
 
         public Player (string name) {
             this.Name = name;
+            this.MyOcean = new Ocean(10);
         }
 
-        public Ocean getShipsPositions(Ocean ocean) {
+        public Ocean getShipsPositionsAndPlaceShipsOnBoard(Ocean ocean) {
 
             // Ship names needed for printing and ship types list
             List<string> shipTypesNames = new List<string> {
