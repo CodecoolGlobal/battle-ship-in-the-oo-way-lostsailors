@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace BattleshipWU {
     class Player {
         public string Name { get; set; }
         public Ocean MyOcean { get; set; }
+        public Ocean MyEnemysOcean { get; set; }
 
         public Player (string name) {
             this.Name = name;
@@ -55,15 +57,15 @@ namespace BattleshipWU {
                     if (shipPlacedInTheOcean == false) {
                         Console.WriteLine("Not possible to place the ship in the ocean, try again");
                     } else {
-                        ocean.placeShipAtTheOcean(ship, position[0], position[1], new Square(Square.SquareType.SHIP));
-                        ocean.displayOcean();
+                        ocean.placeShipAtTheOcean(ship, position[0], position[1]);
+                        ocean.DisplayOcean(Program.Status.SHIPS_POSITIONING);
                     }
                 }
             }
 
             return ocean;
         }
-//cokolwiek
+
         private int[] getShipPositionInput(Ocean ocean) {
             int positionX = -1;
             int positionY = -1;
@@ -71,7 +73,7 @@ namespace BattleshipWU {
                 Console.WriteLine("Position:");
                 string position = Console.ReadLine().ToUpper();
 
-                if (isLetter(position[0].ToString())) {
+                if (position != null && isLetter(position[0].ToString())) {
                     positionY = (int) position[0] - 65;
                     if (positionY >= ocean.Dimension) {
                         positionY = -1;
@@ -118,18 +120,38 @@ namespace BattleshipWU {
         
         }
 
-        public Ocean guessEnemyPositionAKAFire(string position, Ocean enemysOcean, Ocean myOcean) {
+        public Ocean guessEnemyPositionAKAFire(string position, Ocean enemysOcean) {
+            int[] position1 = getShipPositionInput(enemysOcean);
             /* PSEUDOCODE
             if enemyOcean[position] == ship {
                 myOcean[position].color - zaznacz na znaleziony statek
             }
             else {
                 myOcean[position].color - zaznacz ze nie ma statku
+            }*/
+            enemysOcean.Squares[position1[0]][position1[1]].visibleForOpponent = true;
+            if (enemysOcean.Squares[position1[0]][position1[1]].Fill == "X") {
+                System.Console.WriteLine("hit");
+                Thread.Sleep(2000);
             }
-            */
-            return myOcean;
+            else{
+                System.Console.WriteLine("miss");
+                Thread.Sleep(2000);
+            }
+
+            return enemysOcean;
         }
 
+        public bool HasWon(Ocean enemysOcean) {
+            for (int i = 0; i < enemysOcean.Dimension; i++) {
+                for (int j = 0; j < enemysOcean.Dimension; j++) {
+                    if (enemysOcean.Squares[i][j].Fill == "X" && enemysOcean.Squares[i][j].visibleForOpponent == false) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
         public static bool isNumeric(string strToCheck) {
             Regex rg = new Regex(@"^[0-9\s,]*$");
             return rg.IsMatch(strToCheck);
