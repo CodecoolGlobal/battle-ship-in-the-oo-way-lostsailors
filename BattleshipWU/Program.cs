@@ -35,16 +35,17 @@ namespace BattleshipWU {
                             Console.WriteLine($"\nPlease tell me {player} name: ");
                             int index = playersNamesInitial.IndexOf(player);
                             playersObjects[index] = new Player(Console.ReadLine());
-                            playersObjects[index].MyOcean = new Ocean(10);
                             Console.WriteLine($"{player} - put your ships on the board\n" +
                             "The other player - please step out!!");
                             Thread.Sleep(3000);
-                            Ship.displayShipTypes();
-                            playersObjects[index].MyOcean = playersObjects[index].getShipsPositions(playersObjects[index].MyOcean);
+                            Ship.DisplayShipTypes();
+                            playersObjects[index].MyOcean = playersObjects[index].GetShipsPositionsAndPlaceShipsOnBoard(playersObjects[index].MyOcean);
                         }
                         Console.Clear();
                         Console.WriteLine("\n\nAllright! - All ships are in the oceans! Time to play!");
                         Thread.Sleep(5000);
+                        playersObjects[0].MyEnemysOcean = playersObjects[1].MyOcean;
+                        playersObjects[1].MyEnemysOcean = playersObjects[0].MyOcean;
                         gameStatus = Status.FIGHT;
                         break;
 
@@ -55,11 +56,23 @@ namespace BattleshipWU {
                             foreach (Player player in playersObjects) {
                                 Console.Clear();
                                 Console.WriteLine($"\nThis is the status of {player.Name} current shoots:\n\n");
+                                System.Console.WriteLine("Before");
+                                player.MyEnemysOcean.DisplayOcean(Status.FIGHT);
                                 // TUTAJ DISPLAY BOARDA Z HIT/MISS TYLKO
-                                Console.WriteLine("Please input where do you want to shoot");
+                                Console.WriteLine("\nPlease input where do you want to shoot");
+                                player.MyOcean = player.GuessEnemyPositionAKAFire("sth", player.MyEnemysOcean);
                                 // COLLECT INPUT (IF SHIP -> DISPLAY HIT, ELSE -> DISPLAY MISS)
+                                System.Console.WriteLine("\nAfter:");
+                                player.MyEnemysOcean.DisplayOcean(Status.FIGHT);
+                                Thread.Sleep(1000);
                                 // DISPLAY AGAIN UPDATED BOARD
                                 // CHECK ISWIN -> save winnerName = player.Name
+                                if (player.HasWon(player.MyEnemysOcean)) {
+                                    winStatus = true;
+                                    gameStatus = Status.WIN;
+                                    winnerName = player.Name;
+                                    break;
+                                }
                             }
                         }
                         break;
@@ -67,6 +80,7 @@ namespace BattleshipWU {
                     case Status.WIN:
                         Console.Clear();
                         Console.WriteLine($"\nCongrats!! {winnerName} is the champion!!");
+                        Thread.Sleep(5000);
                         gameStatus = Status.START;
                         break;
 
@@ -80,7 +94,7 @@ namespace BattleshipWU {
             }
         }
 
-        enum Status {
+        public enum Status {
             START,
             SHIPS_POSITIONING,
             FIGHT,
