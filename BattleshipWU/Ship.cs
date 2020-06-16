@@ -42,7 +42,7 @@ namespace BattleshipWU {
             }
         }
 
-        public static void displayShipTypes() {
+        public static void DisplayShipTypes() {
             Console.WriteLine("\nAvailable ship types:\n" +
                 "Carrier (occupies 5 squares) - Type: CA\n" +
                 "Battleship(4) - Type: B\n" +

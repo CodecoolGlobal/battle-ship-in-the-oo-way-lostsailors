@@ -49,7 +49,7 @@ namespace BattleshipWU {
                     }
                     // ONLY for game status = Fight print content only if Square is already visible
                     else {
-                        if (squareO.visibleForOpponent is true){
+                        if (squareO.VisibleForOpponent is true){
                             Console.Write(" " + squareO.Fill + " ");
                         }
                         // otherwise print tylda - as unknown value
@@ -62,8 +62,8 @@ namespace BattleshipWU {
             }
         }
 
-        public List<List<Square>> placeShipAtTheOcean(Ship ship, int positionX, int positionY) {
-            if (canPlaceShip(ship, positionX, positionY)) {
+        public List<List<Square>> PlaceShipAtTheOcean(Ship ship, int positionX, int positionY) {
+            if (CanPlaceShip(ship, positionX, positionY)) {
                 if (ship.ShipLayout == "VERTICAL") {
                     for (int i = positionX; i < positionX + ship.Size; i++) {
 
@@ -82,7 +82,7 @@ namespace BattleshipWU {
             return this.Squares;
         }
 
-        public bool canPlaceShip(Ship ship, int positionY, int positionX) {
+        public bool CanPlaceShip(Ship ship, int positionY, int positionX) {
             // TBC - STILL SOME ERRORS WHEN YOU PUT A10 etc
 
             var dimension = Dimension - 1;

@@ -38,8 +38,8 @@ namespace BattleshipWU {
                             Console.WriteLine($"{player} - put your ships on the board\n" +
                             "The other player - please step out!!");
                             Thread.Sleep(3000);
-                            Ship.displayShipTypes();
-                            playersObjects[index].MyOcean = playersObjects[index].getShipsPositionsAndPlaceShipsOnBoard(playersObjects[index].MyOcean);
+                            Ship.DisplayShipTypes();
+                            playersObjects[index].MyOcean = playersObjects[index].GetShipsPositionsAndPlaceShipsOnBoard(playersObjects[index].MyOcean);
                         }
                         Console.Clear();
                         Console.WriteLine("\n\nAllright! - All ships are in the oceans! Time to play!");
@@ -60,7 +60,7 @@ namespace BattleshipWU {
                                 player.MyEnemysOcean.DisplayOcean(Status.FIGHT);
                                 // TUTAJ DISPLAY BOARDA Z HIT/MISS TYLKO
                                 Console.WriteLine("\nPlease input where do you want to shoot");
-                                player.MyOcean = player.guessEnemyPositionAKAFire("sth", player.MyEnemysOcean);
+                                player.MyOcean = player.GuessEnemyPositionAKAFire("sth", player.MyEnemysOcean);
                                 // COLLECT INPUT (IF SHIP -> DISPLAY HIT, ELSE -> DISPLAY MISS)
                                 System.Console.WriteLine("\nAfter:");
                                 player.MyEnemysOcean.DisplayOcean(Status.FIGHT);
