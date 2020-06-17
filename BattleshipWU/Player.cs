@@ -25,11 +25,11 @@ namespace BattleshipWU {
                 "Submarine (3",
                 "Destroyer (2"};
             Ship.ShipType[] shipTypes = new Ship.ShipType[5] {
-                Ship.ShipType.CA,
-                Ship.ShipType.B,
-                Ship.ShipType.CR,
-                Ship.ShipType.S,
-                Ship.ShipType.D};
+                Ship.ShipType.CARRIER,
+                Ship.ShipType.BATTLESHIP,
+                Ship.ShipType.CRUISER,
+                Ship.ShipType.SUBMARINE,
+                Ship.ShipType.DESTROYER};
 
             // Get data from user where to place each type of the ship
             foreach (string type in shipTypesNames) {

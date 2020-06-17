@@ -6,13 +6,12 @@ namespace BattleshipWU {
     class Ship {
 
         public enum ShipType {
-            CA, B, CR, S, D
+            CARRIER = 5,
+            BATTLESHIP = 4,
+            CRUISER = 3,
+            SUBMARINE = 3,
+            DESTROYER = 2
         }
-            /* Carrier (occupies 5 squares) - Type abbreviation: CA
-            * Battleship(4) - B
-            * Cruiser(3) - CR
-            * Submarine(3) - S
-            * Destroyer(2) - D */
 
         public ShipType Type { get; set; }
         public int Size { get; set; }
@@ -22,17 +21,16 @@ namespace BattleshipWU {
             this.Type = type;
             this.ShipLayout = shipLayout;
             switch (type) {
-                case ShipType.CA:
+                case ShipType.CARRIER:
                     this.Size = 5;
                     break;
-                case ShipType.B:
+                case ShipType.BATTLESHIP:
                     this.Size = 4;
                     break;
-                case ShipType.CR:
-                case ShipType.S:
+                case ShipType.CRUISER: // covers as well ship type SUBMARINE
                     this.Size = 3;
                     break;
-                case ShipType.D:
+                case ShipType.DESTROYER:
                     this.Size = 2;
                     break;
             }
