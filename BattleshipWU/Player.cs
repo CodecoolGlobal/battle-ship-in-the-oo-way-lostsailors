@@ -34,7 +34,7 @@ namespace BattleshipWU {
             // Get data from user where to place each type of the ship
             foreach (string type in shipTypesNames) {
                 
-                Console.WriteLine("\nPlease place " + type + " squares) on your ocean:");
+                Printer.Print("\nPlease place " + type + " squares) on your ocean:");
 
                 // Ask for ship position (top left Square of the ship) and layout (horizontal/vertical)
                 // until the ship can be placed on the ocean (1. is inside board, 2. not overlap with
@@ -56,10 +56,11 @@ namespace BattleshipWU {
                     // Here add check if ships do not touch each other
 
                     if (shipPlacedInTheOcean == false) {
-                        Console.WriteLine("Not possible to place the ship in the ocean, try again");
+                        Printer.Print("Not possible to place the ship in the ocean, try again");
                     } else {
                         ocean.PlaceShipAtTheOcean(ship, position[0], position[1]);
-                        ocean.DisplayOcean(Program.Status.SHIPS_POSITIONING);
+                        Printer.Print(ocean, Program.Status.SHIPS_POSITIONING);
+                        // ocean.DisplayOcean(Program.Status.SHIPS_POSITIONING);
                     }
                 }
             }
@@ -71,26 +72,26 @@ namespace BattleshipWU {
             int positionX = -1;
             int positionY = -1;
             while (positionX == -1 || positionY == -1) {
-                Console.WriteLine("Position:");
-                string position = Console.ReadLine().ToUpper();
+                Printer.Print("Position:");
+                string position = GetUserInput().ToUpper();
 
                 if (position != null && IsLetter(position[0].ToString())) {
-                    positionY = (int) position[0] - 65;
+                    positionY = ConvertLetterToInt(position[0]);
                     if (positionY >= ocean.Dimension) {
                         positionY = -1;
-                        Console.WriteLine("Column index exceeded board dimension");
+                        Printer.Print("Column index exceeded board dimension");
                     }
                     if (position.Substring(1) != "" && IsNumeric(position.Substring(1))) {
                         positionX = Int32.Parse(position.Substring(1)) - 1;
                         if (positionX >= ocean.Dimension) {
                             positionX = -1;
-                            Console.WriteLine("Row index exceeded board dimension");
+                            Printer.Print("Row index exceeded board dimension");
                         }
                     } else {
-                        Console.WriteLine("Invalid row number");
+                        Printer.Print("Invalid row number");
                     }
                 } else {
-                    Console.WriteLine("First input character must be a letter indcating column");
+                    Printer.Print("First input character must be a letter indcating column");
                 }
             }
 
@@ -105,15 +106,15 @@ namespace BattleshipWU {
             string layout = null;
             
             while (layout == null) {
-                Console.WriteLine("Layout (h - horizontal/v - vertical):");
-                string layoutInput = Console.ReadLine().ToLower();
+                Printer.Print("Layout (h - horizontal/v - vertical):");
+                string layoutInput = GetUserInput().ToLower();
                 
                 if (layoutInput == "h") {
                     layout = "HORIZONTAL";
                 } else if (layoutInput == "v") {
                     layout = "VERTICAL";
                 } else {
-                    Console.WriteLine("Wrong input");
+                    Printer.Print("Wrong input");
                 }
             }
 
@@ -132,11 +133,11 @@ namespace BattleshipWU {
             }*/
             enemysOcean.Squares[position1[0]][position1[1]].VisibleForOpponent = true;
             if (enemysOcean.Squares[position1[0]][position1[1]].Fill == "X") {
-                System.Console.WriteLine("hit");
+                Printer.Print("hit");
                 Thread.Sleep(2000);
             }
             else{
-                System.Console.WriteLine("miss");
+                Printer.Print("miss");
                 Thread.Sleep(2000);
             }
 
@@ -153,14 +154,25 @@ namespace BattleshipWU {
             }
             return true;
         }
-        public static bool IsNumeric(string strToCheck) {
+       
+       
+        // HELPER METHODS
+        private static bool IsNumeric(string strToCheck) {
             Regex rg = new Regex(@"^[0-9\s,]*$");
             return rg.IsMatch(strToCheck);
         }
 
-        public static bool IsLetter(string strToCheck) {
+        private static bool IsLetter(string strToCheck) {
             Regex rg = new Regex(@"^[a-zA-Z\s,]*$");
             return rg.IsMatch(strToCheck);
+        }
+    
+        private static int ConvertLetterToInt(char letter) {
+            return (int)letter - 65;
+        }
+
+        private static string GetUserInput() {
+            return Console.ReadLine();
         }
     }
 }
