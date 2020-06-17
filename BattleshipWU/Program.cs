@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Threading;
 
+
 namespace BattleshipWU {
     class Program {
         static void Main(string[] args) {
@@ -38,7 +39,12 @@ namespace BattleshipWU {
                             Console.WriteLine($"{player} - put your ships on the board\n" +
                             "The other player - please step out!!");
                             Thread.Sleep(3000);
-                            Ship.DisplayShipTypes();
+                            Printer.Print("\nAvailable ship types:\n" +
+                                            "Carrier (occupies 5 squares) - Type: CA\n" +
+                                            "Battleship(4) - Type: B\n" +
+                                            "Cruiser(3) - Type: CR\n" +
+                                            "Submarine(3) - Type: S\n" +
+                                            "Destroyer(2) - Type: D\n");
                             playersObjects[index].MyOcean = playersObjects[index].GetShipsPositionsAndPlaceShipsOnBoard(playersObjects[index].MyOcean);
                         }
                         Console.Clear();
@@ -57,13 +63,15 @@ namespace BattleshipWU {
                                 Console.Clear();
                                 Console.WriteLine($"\nThis is the status of {player.Name} current shoots:\n\n");
                                 System.Console.WriteLine("Before");
-                                player.MyEnemysOcean.DisplayOcean(Status.FIGHT);
+                                Printer.Print(player.MyEnemysOcean, Status.FIGHT);
+                                // player.MyEnemysOcean.DisplayOcean(Status.FIGHT);
                                 // TUTAJ DISPLAY BOARDA Z HIT/MISS TYLKO
                                 Console.WriteLine("\nPlease input where do you want to shoot");
                                 player.MyOcean = player.GuessEnemyPositionAKAFire("sth", player.MyEnemysOcean);
                                 // COLLECT INPUT (IF SHIP -> DISPLAY HIT, ELSE -> DISPLAY MISS)
                                 System.Console.WriteLine("\nAfter:");
-                                player.MyEnemysOcean.DisplayOcean(Status.FIGHT);
+                                Printer.Print(player.MyEnemysOcean, Status.FIGHT);
+                                // player.MyEnemysOcean.DisplayOcean(Status.FIGHT);
                                 Thread.Sleep(1000);
                                 // DISPLAY AGAIN UPDATED BOARD
                                 // CHECK ISWIN -> save winnerName = player.Name
