@@ -4,10 +4,6 @@ using System.Text;
 
 namespace BattleshipWU {
     class Ship {
-        public enum Layout {
-            HORIZONTAL,
-            VERTICAL
-        }
 
         public enum ShipType {
             CA, B, CR, S, D
