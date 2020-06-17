@@ -75,7 +75,7 @@ namespace BattleshipWU {
                 string position = Console.ReadLine().ToUpper();
 
                 if (position != null && IsLetter(position[0].ToString())) {
-                    positionY = (int) position[0] - 65;
+                    positionY = ConvertLetterToInt(position[0]);
                     if (positionY >= ocean.Dimension) {
                         positionY = -1;
                         Console.WriteLine("Column index exceeded board dimension");
@@ -153,14 +153,21 @@ namespace BattleshipWU {
             }
             return true;
         }
-        public static bool IsNumeric(string strToCheck) {
+       
+       
+        // HELPER METHODS
+        private static bool IsNumeric(string strToCheck) {
             Regex rg = new Regex(@"^[0-9\s,]*$");
             return rg.IsMatch(strToCheck);
         }
 
-        public static bool IsLetter(string strToCheck) {
+        private static bool IsLetter(string strToCheck) {
             Regex rg = new Regex(@"^[a-zA-Z\s,]*$");
             return rg.IsMatch(strToCheck);
+        }
+    
+        private int ConvertLetterToInt(char letter) {
+            return (int)letter - 65;
         }
     }
 }
