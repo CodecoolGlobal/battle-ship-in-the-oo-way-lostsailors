@@ -65,13 +65,13 @@ namespace BattleshipWU {
         public List<List<Square>> PlaceShipAtTheOcean(Ship ship, int positionX, int positionY) {
             if (CanPlaceShip(ship, positionX, positionY)) {
                 if (ship.ShipLayout == "VERTICAL") {
-                    for (int i = positionX; i < positionX + ship.Size; i++) {
+                    for (int i = positionX; i < positionX + (int)ship.Type; i++) {
 
                         this.Squares[i][positionY] = new Square(Square.SquareType.SHIP);
                     }
                 }
                 else if (ship.ShipLayout == "HORIZONTAL") {
-                    for (int j = positionY; j < positionY + ship.Size; j++) {
+                    for (int j = positionY; j < positionY + (int)ship.Type; j++) {
                         this.Squares[positionX][j] = new Square(Square.SquareType.SHIP);
                     }
                 }
@@ -100,10 +100,10 @@ namespace BattleshipWU {
             var endY = positionY;
 
             if (ship.ShipLayout == "VERTICAL") {
-                endY += ship.Size-1;
+                endY += (int)ship.Type-1;
             }
             else {
-                endX += ship.Size-1;
+                endX += (int)ship.Type-1;
             }
             // if end point is not the last coordinate check one past it.
             if (endY < dimension) {

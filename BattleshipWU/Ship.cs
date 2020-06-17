@@ -14,26 +14,11 @@ namespace BattleshipWU {
         }
 
         public ShipType Type { get; set; }
-        public int Size { get; set; }
         public string ShipLayout { get; set; }
         
         public Ship(ShipType type, string shipLayout) {
             this.Type = type;
             this.ShipLayout = shipLayout;
-            switch (type) {
-                case ShipType.CARRIER:
-                    this.Size = 5;
-                    break;
-                case ShipType.BATTLESHIP:
-                    this.Size = 4;
-                    break;
-                case ShipType.CRUISER: // covers as well ship type SUBMARINE
-                    this.Size = 3;
-                    break;
-                case ShipType.DESTROYER:
-                    this.Size = 2;
-                    break;
-            }
         }
 
         public static void DisplayShipTypes() {
